@@ -27,6 +27,7 @@ jobs:
           pip freeze > requirements.txt
           pip uninstall decouple
           pip install python-decouple
+          pip install colorama
       - name: execute py script # run miner
         env:
           STREAMERS: ${{ secrets.STREAMERS }}
