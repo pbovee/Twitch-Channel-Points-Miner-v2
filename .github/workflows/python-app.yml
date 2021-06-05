@@ -28,4 +28,6 @@ jobs:
           STREAMERS: ${{ secrets.STREAMERS }}
           PASSWORD: ${{ secrets.PASSWORD }}
           USERNAME: ${{ secrets.USERNAME }}
-        run: python main.py
+        run: |
+          ls
+          python main.py
