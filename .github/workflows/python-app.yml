@@ -23,8 +23,8 @@ jobs:
           python-version: 3.9
       - name: Install dependencies
         run: |
-          python -m pip3 install --upgrade pip
-          pip3 freeze > requirements.txt
+          python -m pip install --upgrade pip
+          pip freeze > requirements.txt
       - name: execute py script # run miner
         env:
           STREAMERS: ${{ secrets.STREAMERS }}
