@@ -34,5 +34,4 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           USERNAME: ${{ secrets.USERNAME }}
         run: |
-          ls
-          python main.py
+          python3 main.py
