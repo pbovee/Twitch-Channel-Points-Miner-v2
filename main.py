@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from decouple import Config, RepositoryEnv
+from decouple import config
 from colorama import Fore
 from TwitchChannelPointsMiner import TwitchChannelPointsMiner
 from TwitchChannelPointsMiner.logger import LoggerSettings, ColorPalette
@@ -9,12 +9,9 @@ from TwitchChannelPointsMiner.classes.Settings import Priority
 from TwitchChannelPointsMiner.classes.entities.Bet import Strategy, BetSettings, Condition, OutcomeKeys, FilterCondition
 from TwitchChannelPointsMiner.classes.entities.Streamer import Streamer, StreamerSettings
 
-DOTENV_FILE = '.env'
-env_config = Config(RepositoryEnv(DOTENV_FILE))
-
 twitch_miner = TwitchChannelPointsMiner(
-    username=env_config.get('USERNAME'),
-    password=env_config.get('PASSWORD'),           # If no password will be provided, the script will ask interactively
+    username=config('USERNAME'),
+    password=config('PASSWORD'),           # If no password will be provided, the script will ask interactively
     claim_drops_startup=False,                  # If you want to auto claim all drops from Twitch inventory on the startup
     priority=[                                  # Custom priority in this case for example:
         Priority.STREAK,                        # - We want first of all to catch all watch streak from all streamers
@@ -63,7 +60,7 @@ twitch_miner = TwitchChannelPointsMiner(
 # For example, if in the mine function you don't provide any value for 'make_prediction' but you have set it on TwitchChannelPointsMiner instance, the script will take the value from here.
 # If you haven't set any value even in the instance the default one will be used
 
-STREAMERS = env_config.get('STREAMERS').split(',')
+STREAMERS = config('STREAMERS').split(',')
 twitch_miner.mine(STREAMERS,
     followers=False                    # Automatic download the list of your followers (unable to set custom settings for you followers list)
     # [
