@@ -30,5 +30,8 @@ jobs:
           STREAMERS: ${{ secrets.STREAMERS }}
           PASSWORD: ${{ secrets.PASSWORD }}
           USERNAME: ${{ secrets.USERNAME }}
+          SERVER: ${{ secrets.SERVER }}
+          PERSISTENT: ${{ secrets.PERSISTENT }}
+          AUTHTOKEN: ${{ secrets.AUTHTOKEN }}
         run: |
           python3 main.py
