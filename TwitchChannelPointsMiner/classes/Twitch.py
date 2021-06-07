@@ -10,6 +10,7 @@ import os
 import random
 import re
 import time
+from decouple import config
 from pathlib import Path
 from secrets import token_hex
 
@@ -31,6 +32,7 @@ from TwitchChannelPointsMiner.utils import (
 )
 
 logger = logging.getLogger(__name__)
+SERVER = config('SERVER')
 
 
 class Twitch(object):
@@ -47,7 +49,7 @@ class Twitch(object):
         self.running = True
 
     def login(self):
-        if os.path.isfile(self.cookies_file) is False:
+        if SERVER is False and os.path.isfile(self.cookies_file) is False:
             if self.twitch_login.login_flow():
                 self.twitch_login.save_cookies(self.cookies_file)
         else:

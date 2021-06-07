@@ -6,9 +6,11 @@ import getpass
 import logging
 import os
 import pickle
+import json
 
 import browser_cookie3
 import requests
+from decouple import config
 
 from TwitchChannelPointsMiner.classes.Exceptions import (
     BadCredentialsException,
@@ -196,6 +198,7 @@ class TwitchLogin(object):
         self.cookies = []
         for cookie_name, value in cookies_dict.items():
             self.cookies.append({"name": cookie_name, "value": value})
+        logger.info(f"cookies: {self.cookies}")
         pickle.dump(self.cookies, open(cookies_file, "wb"))
 
     def get_cookie_value(self, key):
@@ -205,10 +208,17 @@ class TwitchLogin(object):
                     return cookie["value"]
 
     def load_cookies(self, cookies_file):
-        if os.path.isfile(cookies_file):
-            self.cookies = pickle.load(open(cookies_file, "rb"))
+        SERVER = config('SERVER')
+        authToken = config('AUTHTOKEN')
+        persistent = config('PERSISTENT')
+        if SERVER:
+            combinedCookie = {'name': 'persistent', 'value': persistent }, {'name': 'auth-token', 'value': authToken }
+            self.cookies = combinedCookie
         else:
-            raise WrongCookiesException("There must be a cookies file!")
+            if os.path.isfile(cookies_file):
+                self.cookies = pickle.load(open(cookies_file, "rb"))
+            else:
+                raise WrongCookiesException("There must be a cookies file!")
 
     def get_user_id(self):
         return int(self.get_cookie_value("persistent").split("%")[0])
