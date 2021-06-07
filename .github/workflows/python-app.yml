@@ -30,11 +30,11 @@ jobs:
         env:
           STREAMERS: ${{ secrets.STREAMERS }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          USERNAME: ${{ secrets.USERNAME }}
+          USERNAME: ${{ env.USERNAME }}
           SERVER: ${{ secrets.SERVER }}
           PERSISTENT: ${{ secrets.PERSISTENT }}
           AUTHTOKEN: ${{ secrets.AUTHTOKEN }}
         run: |
           echo "Trying to print username"
-          echo ${{ secrets.USERNAME }}
+          echo ${{ env.USERNAME }}
           python3 main.py
