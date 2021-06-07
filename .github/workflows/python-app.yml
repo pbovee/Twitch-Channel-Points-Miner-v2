@@ -34,4 +34,6 @@ jobs:
           PERSISTENT: ${{ secrets.PERSISTENT }}
           AUTHTOKEN: ${{ secrets.AUTHTOKEN }}
         run: |
+          echo "Trying to print username"
+          echo ${{ secrets.USERNAME }}
           python3 main.py
