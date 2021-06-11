@@ -11,10 +11,38 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build1:
 
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1 
 
+    steps:
+      - name: Check files
+        uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ./requirements.txt
+      - name: execute py script # run miner
+        env:
+          STREAMERS: ${{ secrets.STREAMERS }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          USERNAME: ${{ secrets.USERNAME }}
+          SERVER: ${{ secrets.SERVER }}
+          PERSISTENT: ${{ secrets.PERSISTENT }}
+          AUTHTOKEN: ${{ secrets.AUTHTOKEN }}
+        run: |
+          python3 main.py
+  shutdown2:
+    needs: build1
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1 
     steps:
       - name: Check files
         uses: actions/checkout@v2
