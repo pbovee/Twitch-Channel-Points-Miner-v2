@@ -10,14 +10,12 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '0 */6 * * *'
+    - cron:  '0 */6 * * *'
 
 jobs:
   build1:
 
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 1 
 
     steps:
       - name: Check files
