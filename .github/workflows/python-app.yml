@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build1:
+  main:
 
     runs-on: ubuntu-latest
 
@@ -37,5 +37,31 @@ jobs:
           SERVER: ${{ secrets.SERVER }}
           PERSISTENT: ${{ secrets.PERSISTENT }}
           AUTHTOKEN: ${{ secrets.AUTHTOKEN }}
+        run: |
+          python3 main.py
+  
+  secondary:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check files
+        uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ./requirements.txt
+      - name: execute py script # run miner
+        env:
+          STREAMERS: ${{ secrets.STREAMERS }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          USERNAME: ${{ secrets.SECOND_USERNAME }}
+          SERVER: ${{ secrets.SERVER }}
+          PERSISTENT: ${{ secrets.SECOND_PERSISTENT }}
+          AUTHTOKEN: ${{ secrets.SECOND_AUTHTOKEN }}
         run: |
           python3 main.py
