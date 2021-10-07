@@ -55,12 +55,12 @@ jobs:
           pip install -r ./requirements.txt
       - name: execute py script # run miner
         env:
-          STREAMERS: ${{ secrets.STREAMERS }}
+          STREAMERS: ${{ secrets.FF_STREAMERS }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          USERNAME: ${{ secrets.SECOND_USERNAME }}
+          USERNAME: ${{ secrets.FF_USERNAME }}
           SERVER: ${{ secrets.SERVER }}
-          PERSISTENT: ${{ secrets.SECOND_PERSISTENT }}
-          AUTHTOKEN: ${{ secrets.SECOND_AUTHTOKEN }}
+          PERSISTENT: ${{ secrets.FF_PERSISTENT }}
+          AUTHTOKEN: ${{ secrets.FF_AUTHTOKEN }}
         run: |
           python3 main.py
           
@@ -81,12 +81,12 @@ jobs:
           pip install -r ./requirements.txt
       - name: execute py script # run miner
         env:
-          STREAMERS: ${{ secrets.STREAMERS }}
+          STREAMERS: ${{ secrets.EDGE_STREAMERS }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          USERNAME: ${{ secrets.THIRD_USERNAME }}
+          USERNAME: ${{ secrets.EDGE_USERNAME }}
           SERVER: ${{ secrets.SERVER }}
-          PERSISTENT: ${{ secrets.THIRD_PERSISTENT }}
-          AUTHTOKEN: ${{ secrets.THIRD_AUTHTOKEN }}
+          PERSISTENT: ${{ secrets.EDGE_PERSISTENT }}
+          AUTHTOKEN: ${{ secrets.EDGE_AUTHTOKEN }}
         run: |
           python3 main.py
           
@@ -107,12 +107,12 @@ jobs:
           pip install -r ./requirements.txt
       - name: execute py script # run miner
         env:
-          STREAMERS: ${{ secrets.STREAMERS }}
+          STREAMERS: ${{ secrets.OPERA_STREAMERS }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          USERNAME: ${{ secrets.FOURTH_USERNAME }}
+          USERNAME: ${{ secrets.OPERA_USERNAME }}
           SERVER: ${{ secrets.SERVER }}
-          PERSISTENT: ${{ secrets.FOURTH_PERSISTENT }}
-          AUTHTOKEN: ${{ secrets.FOURTH_AUTHTOKEN }}
+          PERSISTENT: ${{ secrets.OPERA_PERSISTENT }}
+          AUTHTOKEN: ${{ secrets.OPERA_AUTHTOKEN }}
         run: |
           python3 main.py
           
