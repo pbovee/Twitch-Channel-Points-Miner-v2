@@ -15,7 +15,7 @@ on:
 
 jobs:
   main:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
 
     steps:
       - name: Check files
